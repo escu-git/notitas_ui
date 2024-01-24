@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import SignIn from './modules/auth/SignIn'
-// import './index.css'
+import App from './app'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SignIn />
+    <App />
   </React.StrictMode>,
 )
