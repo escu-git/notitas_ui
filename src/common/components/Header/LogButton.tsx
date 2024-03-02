@@ -1,14 +1,22 @@
 import { Button } from "@mui/material"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
+import { UserLogged } from "../../../context/UserContext";
 
-const LogButton = () => {
-    const[logged, setLogged] = useState(true);
+interface Props{
+    userLogged:UserLogged,
+    googleSignIn:()=>void,
+    googleSignOut:()=>void
+}
+
+const LogButton: FC<Props> =  ({userLogged, googleSignIn, googleSignOut}) => {
+    const[logged, setLogged]=useState(false);
 
     useEffect(()=>{
-        setLogged(false);
-    })
+        setLogged(userLogged.username !== '');
+    },[userLogged])
+
     return(
-        <Button>{logged}</Button>
+        <Button onClick={logged? googleSignOut : googleSignIn}>{logged?'Logout': 'Login'}</Button>
     )
 }
 

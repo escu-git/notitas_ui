@@ -1,23 +1,35 @@
 import { Dispatch, FC, ReactNode, SetStateAction, createContext, useState } from "react";
 
+export interface UserLogged {
+    username: string,
+    id: string,
+    email: string,
+    picture: string,
+    locale: string
+}
+
 interface ProviderData{
-    userLogged: object,
-    setUserLogged: Dispatch<SetStateAction<object>>
+    userLogged: UserLogged,
+    setUserLogged: Dispatch<SetStateAction<UserLogged>>
 }
 interface Props{
     children: ReactNode
 }
 
 const defaultState = {
-    userLogged: {},
-    setUserLogged: () => {},
+    userLogged: {
+        username: '',
+        id: '',
+        email: '',
+        picture: '',
+        locale: ''
+    }
 };
 
-const UserContext = createContext<ProviderData>(defaultState);
+export const UserContext = createContext<ProviderData>({userLogged: defaultState.userLogged, setUserLogged:()=>{}});
 
 const UserProvider : FC<Props> = ({children})=>{
     const [userLogged, setUserLogged] = useState(defaultState.userLogged);
-
     return (
         <UserContext.Provider
         value={{

@@ -16,9 +16,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const defaultTheme = createTheme();
 
 function SignIn() {
-  const googleSignIn = () =>{
-    window.open(`${import.meta.env.VITE_API_URL}/auth/google/callback`, '_self');
-  };
+  // const googleSignIn = () =>{
+  //   window.open(`${import.meta.env.VITE_API_URL}/auth/google/callback`, '_self');
+  // };
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -54,7 +54,7 @@ function SignIn() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={()=>googleSignIn()} sx={{ mt: 1 }}>
+            {/* <Box component="form" noValidate onSubmit={()=>googleSignIn()} sx={{ mt: 1 }}> */}
               <TextField
                 margin="normal"
                 required
@@ -101,7 +101,7 @@ function SignIn() {
               </Grid>
               {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
-          </Box>
+          {/* </Box> */}
         </Grid>
       </Grid>
     </ThemeProvider>

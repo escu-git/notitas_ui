@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import LogButton from './LogButton';
+import LoginContainer from './LoginContainer';
 
 interface HeaderProps {
     title: string;
@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
                     <Typography>{title}</Typography>
                 </Grid>
                 <Grid>
-                    <LogButton/>
+                    <LoginContainer/>
                 </Grid>
             </Grid>
         </header>
