@@ -3,8 +3,10 @@ import { useContext, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
 import LogButton from "./LogButton";
 import axios from 'axios';
+import useStyles from "../../../styles/useStyles";
 
 const LoginContainer = () => {
+    const classes = useStyles();
     const {userLogged} = useContext(UserContext);
     const username = userLogged != null? userLogged.username : null;
 
@@ -28,7 +30,7 @@ const LoginContainer = () => {
     };
 
     return(
-        <Grid>
+        <Grid className={classes.loginContainer}>
             <Grid>
                 {userLogged && <Typography>{username}</Typography>}
             </Grid>

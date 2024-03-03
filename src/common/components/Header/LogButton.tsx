@@ -1,6 +1,7 @@
 import { Button } from "@mui/material"
 import { FC, useEffect, useState } from "react"
 import { UserLogged } from "../../../context/UserContext";
+import useStyles from "../../../styles/useStyles";
 
 interface Props{
     userLogged:UserLogged,
@@ -9,6 +10,7 @@ interface Props{
 }
 
 const LogButton: FC<Props> =  ({userLogged, googleSignIn, googleSignOut}) => {
+    const classes = useStyles();
     const[logged, setLogged]=useState(false);
 
     useEffect(()=>{
@@ -16,7 +18,7 @@ const LogButton: FC<Props> =  ({userLogged, googleSignIn, googleSignOut}) => {
     },[userLogged])
 
     return(
-        <Button onClick={logged? googleSignOut : googleSignIn}>{logged?'Logout': 'Login'}</Button>
+        <Button className={classes.loginButton} onClick={logged? googleSignOut : googleSignIn}>{logged?'Logout': 'Login'}</Button>
     )
 }
 
