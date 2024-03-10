@@ -7,17 +7,24 @@ import useStyles from "../../../styles/useStyles";
 
 const LoginContainer = () => {
     const classes = useStyles();
-    const {userLogged} = useContext(UserContext);
-    const username = userLogged != null? userLogged.username : null;
+    const {userLogged,setUserLogged, isLogged, setIsLogged} = useContext(UserContext);
+    const username = userLogged.displayName !=='' ? userLogged.displayName : null;
 
     useEffect(()=>{
-        fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
-            method: "GET",
-            credentials: "include",
-          })
-        .then(res=>{
-            console.log(res)
-        })
+        const fetchUser = () =>{
+            fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
+                method: "GET",
+                credentials: "include",
+              })
+            .then(res=>res.json())
+            .then(data=>{
+                if(!data.error){
+                    setUserLogged(data.user)
+                    setIsLogged(true)
+                }
+            })
+        }
+       fetchUser();
     },[])
 
     const googleSignIn = () =>{
@@ -26,18 +33,17 @@ const LoginContainer = () => {
     };
 
     const googleSignOut = () =>{
-       axios.get(`${import.meta.env.VITE_API_URL}/auth/logout`);
+       axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`)
+       .then(res=>console.log(res))
     };
 
     return(
-        <Grid className={classes.loginContainer}>
-            <Grid>
+        <Grid container className={classes.loginContainer}>
+            <Grid item xs={6}>
                 {userLogged && <Typography>{username}</Typography>}
             </Grid>
-            <Grid>
-                <LogButton userLogged={userLogged} googleSignIn={googleSignIn} googleSignOut={googleSignOut}/>
-                <LogButton userLogged={userLogged} googleSignIn={googleSignOut} googleSignOut={googleSignOut}/>
-
+            <Grid item xs={6} className={classes.loginButtons}>
+                <LogButton userLogged={userLogged} isLogged={isLogged} setIsLogged={setIsLogged} googleSignIn={googleSignIn} googleSignOut={googleSignOut}/>
             </Grid>
         </Grid>
     )

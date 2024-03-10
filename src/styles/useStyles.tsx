@@ -7,7 +7,7 @@ const color = useColorPallete;
 const useStyles = makeStyles( ({
     header:{
         backgroundColor:color.primary.light,
-        padding:'2em'
+        padding:'2em',
     },
     title:{
         color:color.white,
@@ -17,6 +17,11 @@ const useStyles = makeStyles( ({
     loginContainer:{
         display:'flex',
         justifyContent:'space-between',
+        alignItems:'center',
+    },
+    loginButtons:{
+        display:'flex',
+        justifyContent:'flex-end',
         alignItems:'center',
     },
     loginButton:{

@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import SignIn from "../../modules/auth/SignIn";
-import NotFound from "../components/NotFound";
-import Home from "../../modules/home/Home";
-import MainContainer from "../components/MainContainer/MainContainer";
+import SignIn from "@src/modules/auth/SignIn";
+import NotFound from "@src/common/components/NotFound";
+import MainContainer from "@src/common/components/MainContainer/MainContainer";
+import NotesView from "@src/modules/notes/NotesView";
 
 //Routes provided to app router:
 export const routes = createBrowserRouter(
@@ -13,7 +13,7 @@ export const routes = createBrowserRouter(
             children:
             [
                 {
-                    element:<Home/>,
+                    element: <NotesView/>,
                     path:''
 
                 },
