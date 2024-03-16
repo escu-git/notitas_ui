@@ -11,8 +11,8 @@ export default defineConfig({
   resolve:{
     alias:[
       {
-        find:'@styles',
-        replacement: path.resolve(path.join(__dirname, '/src/styles'))
+        find:'@src',
+        replacement: path.resolve(path.join(__dirname, '/src'))
     }
     ]
   }

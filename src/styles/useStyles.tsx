@@ -5,6 +5,7 @@ import { useColorPallete } from "./colorPallete"
 const color = useColorPallete;
 
 const useStyles = makeStyles( ({
+    //#region header and maincontainer
     header:{
         backgroundColor:color.primary.light,
         padding:'2em',
@@ -29,7 +30,13 @@ const useStyles = makeStyles( ({
         padding:'1em',
         borderRadius:'5px',
         cursor:'pointer'
+    },
+    //#endregion header and maincontainer
+    //#region notas
+    notePreview:{
+        border:'1px solid black'
     }
+    //#endregion notas
 }))
 
 export default useStyles;
