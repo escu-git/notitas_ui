@@ -7,29 +7,17 @@ import useStyles from "../../../styles/useStyles";
 
 const LoginContainer = () => {
     const classes = useStyles();
-    const {userLogged,setUserLogged, isLogged, setIsLogged} = useContext(UserContext);
+    const {userLogged, isLogged, setIsLogged, fetchUser} = useContext(UserContext);
     const username = userLogged.displayName !=='' ? userLogged.displayName : null;
 
+
     useEffect(()=>{
-        const fetchUser = () =>{
-            fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
-                method: "GET",
-                credentials: "include",
-              })
-            .then(res=>res.json())
-            .then(data=>{
-                if(!data.error){
-                    setUserLogged(data.user)
-                    setIsLogged(true)
-                }
-            })
-        }
-       fetchUser();
+        fetchUser()
     },[])
 
     const googleSignIn = () =>{
-        // console.log(`${import.meta.env.VITE_API_URL}/auth/google`)
         window.open(`${import.meta.env.VITE_API_URL}/auth/login/google`, '_self');
+
     };
 
     const googleSignOut = () =>{

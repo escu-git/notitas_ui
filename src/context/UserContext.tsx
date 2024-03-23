@@ -22,7 +22,8 @@ interface ProviderData{
     userLogged: UserLogged,
     setUserLogged: Dispatch<SetStateAction<UserLogged>>,
     isLogged: boolean,
-    setIsLogged: Dispatch<SetStateAction<boolean>>
+    setIsLogged: Dispatch<SetStateAction<boolean>>,
+    fetchUser: () => void
 }
 interface Props{
     children: ReactNode
@@ -46,18 +47,41 @@ const defaultIsLogged: {isLogged: boolean} = {
     isLogged:false
 }
 
-export const UserContext = createContext<ProviderData>({userLogged: defaultState.userLogged, setUserLogged:()=>{}, isLogged: defaultIsLogged.isLogged, setIsLogged:()=>{}});
+export const UserContext = createContext<ProviderData>({userLogged: defaultState.userLogged, setUserLogged:()=>{}, isLogged: defaultIsLogged.isLogged, setIsLogged:()=>{}, fetchUser:()=>{}});
 
 const UserProvider : FC<Props> = ({children})=>{
     const [userLogged, setUserLogged] = useState(defaultState.userLogged);
     const [isLogged, setIsLogged] = useState(defaultIsLogged.isLogged);
+
+    const fetchUser = () =>{
+        try{
+            fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
+                method: "GET",
+                credentials: "include",
+              })
+            .then(res=>res.json())
+            .then(data=>{
+                if(!data.error){
+                    setUserLogged(data.user)
+                    setIsLogged(true)
+                    
+                }else{
+                    setIsLogged(false)
+                }
+            })
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     return (
         <UserContext.Provider
         value={{
             userLogged,
             setUserLogged,
             isLogged,
-            setIsLogged
+            setIsLogged,
+            fetchUser
         }}
         >{children}</UserContext.Provider>
     )

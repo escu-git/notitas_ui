@@ -1,13 +1,11 @@
-import React from 'react';
-// import { Outlet } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import Header from '../Header/Header';
 
-const MainContainer: React.FC = () => {
+const MainContainer = () => {
     return (
         <Grid item xs={12}>
             <Header title={'Notitas App'}/>
-            {/* <Outlet/> */}
+            {/* {children} */}
         </Grid>
     );
 };

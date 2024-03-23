@@ -1,3 +1,4 @@
+import { NewNoteModel } from "@src/models/Notes";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -12,27 +13,27 @@ const notesService ={
         .then(res=>res.json());
         return response
     },
-    postNote: async()=>{
+    postNote: async(note:NewNoteModel)=>{
         const response = await fetch(`${API_URL}/notes/createNote`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({
-                "title": "Preparativos para el viaje",
-                "content": "Hacer la maleta, revisar los documentos y comprar billetes de avión.",
-                "user": "escuderopablo.dev@gmail.com",
-                "category": 3,
-                "reminder": {
-                  "active": true,
-                  "time": "2024-03-20T18:00:00"
-                },
-                "active": true
-              })
+            body:JSON.stringify(note)
         })
         const data = await response.json()
         return data
     },
+    deleteNote: async(id:string)=>{
+        const response = await fetch(`${API_URL}/notes/deleteNote/${id}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        }) .then(res=>res.json());
+        return response;
+           
+    }
 }
 
 export default notesService;

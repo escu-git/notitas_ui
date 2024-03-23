@@ -15,7 +15,6 @@ const LogButton: FC<Props> =  ({userLogged, isLogged, setIsLogged, googleSignIn,
     const classes = useStyles();
 
     useEffect(()=>{
-        console.log(isLogged)
         setIsLogged(userLogged.displayName !== '');
     },[isLogged])
 
