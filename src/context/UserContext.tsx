@@ -1,4 +1,4 @@
-import { Dispatch, FC, ReactNode, SetStateAction, createContext, useState } from "react";
+import { Dispatch, FC, ReactNode, SetStateAction, createContext, useEffect, useRef, useState } from "react";
 
 export interface UserLogged {
     _id: number,
@@ -17,13 +17,15 @@ export interface isLogged {
     setIsLogged:() => Dispatch<SetStateAction<boolean>>
 }
 
-
 interface ProviderData{
     userLogged: UserLogged,
     setUserLogged: Dispatch<SetStateAction<UserLogged>>,
     isLogged: boolean,
     setIsLogged: Dispatch<SetStateAction<boolean>>,
-    fetchUser: () => void
+    fetchUser: () => void,
+    logOutUser: () => void,
+    isLoadingUserData: boolean,
+    logged: React.MutableRefObject<boolean>
 }
 interface Props{
     children: ReactNode
@@ -47,31 +49,65 @@ const defaultIsLogged: {isLogged: boolean} = {
     isLogged:false
 }
 
-export const UserContext = createContext<ProviderData>({userLogged: defaultState.userLogged, setUserLogged:()=>{}, isLogged: defaultIsLogged.isLogged, setIsLogged:()=>{}, fetchUser:()=>{}});
+const defaultLoadingUserData:{isLoadingUserData:boolean} ={
+    isLoadingUserData:true
+}
+
+export const UserContext = createContext<ProviderData>(
+    {
+        userLogged: defaultState.userLogged, 
+        setUserLogged:()=>{}, 
+        isLogged: defaultIsLogged.isLogged, 
+        setIsLogged:()=>{}, 
+        fetchUser:()=>{},
+        logOutUser:()=>{},
+        isLoadingUserData: defaultLoadingUserData.isLoadingUserData,
+        logged: {current: false}
+    });
 
 const UserProvider : FC<Props> = ({children})=>{
     const [userLogged, setUserLogged] = useState(defaultState.userLogged);
     const [isLogged, setIsLogged] = useState(defaultIsLogged.isLogged);
+    const[isLoadingUserData, setIsLoadingUserData]=useState(defaultLoadingUserData.isLoadingUserData);
+    const logged = useRef<boolean>(false)
 
     const fetchUser = () =>{
         try{
-            fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
-                method: "GET",
-                credentials: "include",
-              })
-            .then(res=>res.json())
-            .then(data=>{
-                if(!data.error){
-                    setUserLogged(data.user)
-                    setIsLogged(true)
-                    
-                }else{
-                    setIsLogged(false)
-                }
-            })
+            if(!logged.current){
+                setIsLoadingUserData(true)
+                fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
+                    method: "GET",
+                    credentials: "include",
+                  })
+                .then(res=>res.json())
+                .then(data=>{
+                    if(!data.error){
+                        logged.current = true
+                        setUserLogged(data.user)
+                        setIsLogged(true)
+                        setIsLoadingUserData(false)
+                    }
+                })
+            }else{
+                setIsLoadingUserData(false)
+            }
         }catch(err){
-            console.log(err)
+            console.error(err)
         }
+    }
+    const logOutUser = ()=>{
+        fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, { 
+            method: 'GET', credentials: 'include', redirect:'follow'
+        })
+        .then(function(response) {
+            if(response.status == 200){
+                setIsLogged(defaultIsLogged.isLogged);
+                setUserLogged(defaultState.userLogged);
+                logged.current = false;
+            }
+        }).catch(function(err) {
+            console.error(err);
+        });
     }
 
     return (
@@ -81,7 +117,10 @@ const UserProvider : FC<Props> = ({children})=>{
             setUserLogged,
             isLogged,
             setIsLogged,
-            fetchUser
+            fetchUser,
+            logOutUser,
+            isLoadingUserData,
+            logged
         }}
         >{children}</UserContext.Provider>
     )

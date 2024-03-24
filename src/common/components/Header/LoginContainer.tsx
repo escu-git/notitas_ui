@@ -2,12 +2,13 @@ import { Grid, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
 import LogButton from "./LogButton";
-import axios from 'axios';
 import useStyles from "../../../styles/useStyles";
+// import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
+    // const navigate = useNavigate()
     const classes = useStyles();
-    const {userLogged, isLogged, setIsLogged, fetchUser} = useContext(UserContext);
+    const {userLogged, isLogged, setIsLogged, fetchUser, logOutUser} = useContext(UserContext);
     const username = userLogged.displayName !=='' ? userLogged.displayName : null;
 
 
@@ -21,8 +22,13 @@ const LoginContainer = () => {
     };
 
     const googleSignOut = () =>{
-       axios.post(`${import.meta.env.VITE_API_URL}/auth/logout`)
-       .then(res=>console.log(res))
+        try{
+            logOutUser();
+        }catch(err){
+            console.error(err)
+        }finally{
+            // navigate(0)
+        }
     };
 
     return(
