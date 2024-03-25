@@ -1,4 +1,4 @@
-import { Dispatch, FC, ReactNode, SetStateAction, createContext, useEffect, useRef, useState } from "react";
+import { Dispatch, FC, ReactNode, SetStateAction, createContext, useRef, useState } from "react";
 
 export interface UserLogged {
     _id: number,
@@ -73,20 +73,23 @@ const UserProvider : FC<Props> = ({children})=>{
 
     const fetchUser = () =>{
         try{
+            setIsLoadingUserData(true)
             if(!logged.current){
-                setIsLoadingUserData(true)
                 fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`,{
                     method: "GET",
                     credentials: "include",
                   })
-                .then(res=>res.json())
+                .then(res=>{
+                    return res.json()})
                 .then(data=>{
                     if(!data.error){
                         logged.current = true
                         setUserLogged(data.user)
                         setIsLogged(true)
-                        setIsLoadingUserData(false)
                     }
+                }).then(_=> {
+                    _
+                    setIsLoadingUserData(false)
                 })
             }else{
                 setIsLoadingUserData(false)

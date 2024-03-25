@@ -7,7 +7,7 @@ interface privateRouteProps{
     element: JSX.Element,
 }
 const PrivateRoute = ({element}: privateRouteProps) => {
-    const { logged, isLoadingUserData, fetchUser } = useContext(UserContext);
+    const { isLoadingUserData, fetchUser, isLogged } = useContext(UserContext);
 
     useEffect(()=>{
         fetchUser()
@@ -16,7 +16,7 @@ const PrivateRoute = ({element}: privateRouteProps) => {
     if(isLoadingUserData)
         return <LoadingSpinner/>
 
-    return  logged?.current ? (
+    return  isLogged ? (
         <div>
             {element}
         </div>
