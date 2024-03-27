@@ -4,7 +4,14 @@ const API_URL = import.meta.env.VITE_API_URL
 
 const notesService ={
     getAllNotes: async()=>{
-        const response = await fetch(`${API_URL}/notes/getAllNotes`)
+        const response = await fetch(`${API_URL}/notes/getAllNotes`,{
+            method:'GET',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            credentials:'include'
+        
+        })
         .then(res=> res.json())
         return response
     },
@@ -19,6 +26,7 @@ const notesService ={
             headers:{
                 'Content-Type':'application/json'
             },
+            credentials:'include',
             body:JSON.stringify(note)
         })
         const data = await response.json()
@@ -29,7 +37,8 @@ const notesService ={
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'
-            }
+            },
+            credentials:'include'
         }) .then(res=>res.json());
         return response;
            

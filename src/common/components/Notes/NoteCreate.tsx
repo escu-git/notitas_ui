@@ -72,8 +72,8 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
         setReminder(!reminder)
     }
 
-    return <Modal className={classes.modalNewNote} open={openCreateNoteModal} onClose={handleCloseModal}>
-        <Grid container item xs={12} className={classes.createNoteModal}>
+    return <Modal className={classes.modalNewNote} open={openCreateNoteModal} onClose={handleCloseModal} >
+        <Grid container item xs={12} md={12}  className={classes.createNoteModal} >
             <Paper className={classes.modalPaper}>
                 <Grid className={classes.modalHeader}>
                     <Typography variant={'h6'} className={classes.modalHeaderTitle}>Create Note</Typography>

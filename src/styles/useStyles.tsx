@@ -34,7 +34,8 @@ const useStyles = makeStyles( ({
     //#endregion header and maincontainer
     //#region notas
     viewNotasContainer:{
-        padding:'1.5em'
+        padding:'1.5em',
+        minHeight:'90vh'
     },
     notePreview:{
         
@@ -43,7 +44,12 @@ const useStyles = makeStyles( ({
         width:'100%',
         height:'100%',
         marginTop:'10em',
-
+    },
+    modalNewNoteMobile:{
+        width:'90%',
+        height:'100%',
+        margin:'auto',
+        marginTop:'10em',
 
     },
     modalPaper:{
@@ -74,6 +80,16 @@ const useStyles = makeStyles( ({
     },
     modalInput:{
         width:'80%'
+    },
+    mobileCreateButtonContainer:{
+        position: 'absolute',
+        bottom:'1em',
+        left:0,
+        marginTop:'1em'
+    },
+    mobileCreateButton:{
+        width:'90%',
+        height:'3em'
     }
 }
     //#endregion notas
