@@ -5,6 +5,7 @@ import { NewNoteModel } from '@src/models/Notes';
 import notesService from '@src/services/notesService';
 import useStyles from '@src/styles/useStyles';
 import { UserContext } from '@src/context/UserContext';
+import useDisplaySize from '@src/common/hooks/useDisplaySize';
 
 interface componentProps {
     modal: {
@@ -19,6 +20,7 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
     const { userLogged } = useContext(UserContext)
     const { openCreateNoteModal, setOpenCreateNoteModal } = modal;
     const [reminder, setReminder] = useState<boolean>(false)
+    const {isSmallDevice} = useDisplaySize();
 
     const INITIAL_VALUES: NewNoteModel = {
         title: "",
@@ -72,7 +74,7 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
         setReminder(!reminder)
     }
 
-    return <Modal className={classes.modalNewNote} open={openCreateNoteModal} onClose={handleCloseModal} >
+    return <Modal className={isSmallDevice ? classes.modalNewNoteMobile : classes.modalNewNote} open={openCreateNoteModal} onClose={handleCloseModal} >
         <Grid container item xs={12} md={12}  className={classes.createNoteModal} >
             <Paper className={classes.modalPaper}>
                 <Grid className={classes.modalHeader}>

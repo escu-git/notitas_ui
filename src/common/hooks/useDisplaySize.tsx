@@ -1,8 +1,3 @@
-
-
-// const theme = useTheme();
-// const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'))
-
 import { useMediaQuery, useTheme } from "@mui/material";
 
 const useDisplaySize = ()=>{

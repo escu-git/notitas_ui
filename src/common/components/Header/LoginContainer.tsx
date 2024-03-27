@@ -26,17 +26,15 @@ const LoginContainer = () => {
             logOutUser();
         }catch(err){
             console.error(err)
-        }finally{
-            // navigate(0)
         }
     };
 
     return(
         <Grid container className={classes.loginContainer}>
-            <Grid item xs={6}>
-                {userLogged && <Typography>{username}</Typography>}
+            <Grid item xs={9}>
+                {userLogged && <Typography className={classes.headerUsername} variant='subtitle2'>{username}</Typography>}
             </Grid>
-            <Grid item xs={6} className={classes.loginButtons}>
+            <Grid item xs={3} className={classes.loginButtons}>
                 <LogButton userLogged={userLogged} isLogged={isLogged} setIsLogged={setIsLogged} googleSignIn={googleSignIn} googleSignOut={googleSignOut}/>
             </Grid>
         </Grid>

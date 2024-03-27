@@ -1,7 +1,9 @@
-import { Button } from "@mui/material"
+import { Grid } from "@mui/material"
 import { FC, useEffect} from "react"
 import { UserLogged} from "../../../context/UserContext";
 import useStyles from "../../../styles/useStyles";
+import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from '@mui/icons-material/Login';
 
 interface Props{
     userLogged:UserLogged,
@@ -19,7 +21,13 @@ const LogButton: FC<Props> =  ({userLogged, isLogged, setIsLogged, googleSignIn,
     },[isLogged])
 
     return(
-        <Button className={classes.loginButton} onClick={isLogged? googleSignOut : googleSignIn}>{isLogged?'Logout': 'Login'}</Button>
+        <Grid container flexDirection='row' justifyContent='center'>
+           {isLogged? 
+            <LogoutIcon className={classes.logButton} onClick={googleSignOut }/>
+           :
+            <LoginIcon className={classes.logButton} onClick={googleSignIn}/>
+           }
+        </Grid>
     )
 }
 

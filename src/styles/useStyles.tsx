@@ -8,7 +8,7 @@ const useStyles = makeStyles( ({
     //#region header and maincontainer
     header:{
         backgroundColor:color.primary.light,
-        padding:'1em 1.5em',
+        padding:'0.5em 1.5em',
     },
     title:{
         color:color.white,
@@ -27,9 +27,25 @@ const useStyles = makeStyles( ({
     },
     loginButton:{
         backgroundColor:color.white + '!important',
-        padding:'1em',
+        // padding:'1em',
         borderRadius:'5px',
         cursor:'pointer'
+    },
+    logout:{
+        fontSize:'16px !important',
+        color:color.white + '!important',
+        cursor:'pointer',
+        // marginLeft:'1em'
+    },
+    logButton:{
+        color:color.white + '!important',
+        fontSize:'28px'
+    },
+    headerUsername:{
+        color:color.white,
+        fontSize:'16px',
+        fontWeight:'bold',
+        textAlign:'center'
     },
     //#endregion header and maincontainer
     //#region notas
