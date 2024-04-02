@@ -1,148 +1,148 @@
 import {
-  Dispatch,
-  FC,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useRef,
-  useState,
+    Dispatch,
+    FC,
+    ReactNode,
+    SetStateAction,
+    createContext,
+    useRef,
+    useState,
 } from 'react'
 
 export interface UserLogged {
-  _id: number
-  displayName: string
-  name: string
-  surname: string
-  email: string
-  language: string
-  picture: string
-  accountType: string
-  accountId: number
+    _id: number
+    displayName: string
+    name: string
+    surname: string
+    email: string
+    language: string
+    picture: string
+    accountType: string
+    accountId: number
 }
 
 export interface isLogged {
-  isLogged: boolean
-  setIsLogged: () => Dispatch<SetStateAction<boolean>>
+    isLogged: boolean
+    setIsLogged: () => Dispatch<SetStateAction<boolean>>
 }
 
 interface ProviderData {
-  userLogged: UserLogged
-  setUserLogged: Dispatch<SetStateAction<UserLogged>>
-  isLogged: boolean
-  setIsLogged: Dispatch<SetStateAction<boolean>>
-  fetchUser: () => void
-  logOutUser: () => void
-  isLoadingUserData: boolean
-  logged: React.MutableRefObject<boolean>
+    userLogged: UserLogged
+    setUserLogged: Dispatch<SetStateAction<UserLogged>>
+    isLogged: boolean
+    setIsLogged: Dispatch<SetStateAction<boolean>>
+    fetchUser: () => void
+    logOutUser: () => void
+    isLoadingUserData: boolean
+    logged: React.MutableRefObject<boolean>
 }
 interface Props {
-  children: ReactNode
+    children: ReactNode
 }
 
 const defaultState: { userLogged: UserLogged } = {
-  userLogged: {
-    _id: 0,
-    displayName: '',
-    name: '',
-    surname: '',
-    email: '',
-    language: '',
-    picture: '',
-    accountType: '',
-    accountId: 0,
-  },
+    userLogged: {
+        _id: 0,
+        displayName: '',
+        name: '',
+        surname: '',
+        email: '',
+        language: '',
+        picture: '',
+        accountType: '',
+        accountId: 0,
+    },
 }
 
 const defaultIsLogged: { isLogged: boolean } = {
-  isLogged: false,
+    isLogged: false,
 }
 
 const defaultLoadingUserData: { isLoadingUserData: boolean } = {
-  isLoadingUserData: true,
+    isLoadingUserData: true,
 }
 
 export const UserContext = createContext<ProviderData>({
-  userLogged: defaultState.userLogged,
-  setUserLogged: () => {},
-  isLogged: defaultIsLogged.isLogged,
-  setIsLogged: () => {},
-  fetchUser: () => {},
-  logOutUser: () => {},
-  isLoadingUserData: defaultLoadingUserData.isLoadingUserData,
-  logged: { current: false },
+    userLogged: defaultState.userLogged,
+    setUserLogged: () => {},
+    isLogged: defaultIsLogged.isLogged,
+    setIsLogged: () => {},
+    fetchUser: () => {},
+    logOutUser: () => {},
+    isLoadingUserData: defaultLoadingUserData.isLoadingUserData,
+    logged: { current: false },
 })
 
 const UserProvider: FC<Props> = ({ children }) => {
-  const [userLogged, setUserLogged] = useState(defaultState.userLogged)
-  const [isLogged, setIsLogged] = useState(defaultIsLogged.isLogged)
-  const [isLoadingUserData, setIsLoadingUserData] = useState(
-    defaultLoadingUserData.isLoadingUserData,
-  )
-  const logged = useRef<boolean>(false)
+    const [userLogged, setUserLogged] = useState(defaultState.userLogged)
+    const [isLogged, setIsLogged] = useState(defaultIsLogged.isLogged)
+    const [isLoadingUserData, setIsLoadingUserData] = useState(
+        defaultLoadingUserData.isLoadingUserData,
+    )
+    const logged = useRef<boolean>(false)
 
-  const fetchUser = () => {
-    try {
-      setIsLoadingUserData(true)
-      if (!logged.current) {
-        fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`, {
-          method: 'GET',
-          credentials: 'include',
-        })
-          .then((res) => {
-            return res.json()
-          })
-          .then((data) => {
-            if (!data.error) {
-              logged.current = true
-              setUserLogged(data.user)
-              setIsLogged(true)
+    const fetchUser = () => {
+        try {
+            setIsLoadingUserData(true)
+            if (!logged.current) {
+                fetch(`${import.meta.env.VITE_API_URL}/auth/currentUser`, {
+                    method: 'GET',
+                    credentials: 'include',
+                })
+                    .then((res) => {
+                        return res.json()
+                    })
+                    .then((data) => {
+                        if (!data.error) {
+                            logged.current = true
+                            setUserLogged(data.user)
+                            setIsLogged(true)
+                        }
+                    })
+                    .then((_) => {
+                        _
+                        setIsLoadingUserData(false)
+                    })
+            } else {
+                setIsLoadingUserData(false)
             }
-          })
-          .then((_) => {
-            _
-            setIsLoadingUserData(false)
-          })
-      } else {
-        setIsLoadingUserData(false)
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }
-  const logOutUser = () => {
-    fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
-      method: 'GET',
-      credentials: 'include',
-      redirect: 'follow',
-    })
-      .then(function (response) {
-        if (response.status == 200) {
-          setIsLogged(defaultIsLogged.isLogged)
-          setUserLogged(defaultState.userLogged)
-          logged.current = false
+        } catch (err) {
+            console.error(err)
         }
-      })
-      .catch(function (err) {
-        console.error(err)
-      })
-  }
+    }
+    const logOutUser = () => {
+        fetch(`${import.meta.env.VITE_API_URL}/auth/logout`, {
+            method: 'GET',
+            credentials: 'include',
+            redirect: 'follow',
+        })
+            .then(function (response) {
+                if (response.status == 200) {
+                    setIsLogged(defaultIsLogged.isLogged)
+                    setUserLogged(defaultState.userLogged)
+                    logged.current = false
+                }
+            })
+            .catch(function (err) {
+                console.error(err)
+            })
+    }
 
-  return (
-    <UserContext.Provider
-      value={{
-        userLogged,
-        setUserLogged,
-        isLogged,
-        setIsLogged,
-        fetchUser,
-        logOutUser,
-        isLoadingUserData,
-        logged,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  )
+    return (
+        <UserContext.Provider
+            value={{
+                userLogged,
+                setUserLogged,
+                isLogged,
+                setIsLogged,
+                fetchUser,
+                logOutUser,
+                isLoadingUserData,
+                logged,
+            }}
+        >
+            {children}
+        </UserContext.Provider>
+    )
 }
 
 export default UserProvider

@@ -4,13 +4,13 @@ import ThemeProvider from './context/ThemeContext'
 import UserProvider from './context/UserContext'
 
 const App = () => {
-  return (
-    <UserProvider>
-      <ThemeProvider>
-        <RouterProvider router={routes} />
-      </ThemeProvider>
-    </UserProvider>
-  )
+    return (
+        <UserProvider>
+            <ThemeProvider>
+                <RouterProvider router={routes} />
+            </ThemeProvider>
+        </UserProvider>
+    )
 }
 
 export default App

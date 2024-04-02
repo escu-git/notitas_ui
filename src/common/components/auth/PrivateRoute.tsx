@@ -4,18 +4,18 @@ import { Navigate } from 'react-router-dom'
 import LoadingSpinner from '../Loading/LoadingSpinner'
 
 interface privateRouteProps {
-  element: JSX.Element
+    element: JSX.Element
 }
 const PrivateRoute = ({ element }: privateRouteProps) => {
-  const { isLoadingUserData, fetchUser, isLogged } = useContext(UserContext)
+    const { isLoadingUserData, fetchUser, isLogged } = useContext(UserContext)
 
-  useEffect(() => {
-    fetchUser()
-  }, [])
+    useEffect(() => {
+        fetchUser()
+    }, [])
 
-  if (isLoadingUserData) return <LoadingSpinner />
+    if (isLoadingUserData) return <LoadingSpinner />
 
-  return isLogged ? <div>{element}</div> : <Navigate to="/login" replace />
+    return isLogged ? <div>{element}</div> : <Navigate to="/login" replace />
 }
 
 export default PrivateRoute

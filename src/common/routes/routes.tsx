@@ -8,23 +8,23 @@ import LoginCallback from '../components/auth/LoginCallback'
 
 //Routes provided to app router:
 export const routes = createBrowserRouter([
-  {
-    path: '/',
-    element: <PrivateRoute element={<MainContainer />} />,
-    children: [
-      {
-        element: <NotesView />,
+    {
         path: '/',
-      },
-    ],
-    errorElement: <NotFound />,
-  },
-  {
-    path: 'login',
-    element: <Header title={'Notitas App'} />,
-  },
-  {
-    path: 'auth/callback',
-    element: <LoginCallback />,
-  },
+        element: <PrivateRoute element={<MainContainer />} />,
+        children: [
+            {
+                element: <NotesView />,
+                path: '/',
+            },
+        ],
+        errorElement: <NotFound />,
+    },
+    {
+        path: 'login',
+        element: <Header title={'Notitas App'} setHeaderHeight={()=>{}}/>,
+    },
+    {
+        path: 'auth/callback',
+        element: <LoginCallback />,
+    },
 ])

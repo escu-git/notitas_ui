@@ -8,64 +8,65 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import useDisplaySize from '@src/common/hooks/useDisplaySize'
 
 const NotesView = () => {
-  const classes = useStyles()
-  const { isSmallDevice } = useDisplaySize()
-  const { notes, fetchAgain } = useNoteList()
-  const [openCreateNoteModal, setOpenCreateNoteModal] = useState<boolean>(false)
+    const classes = useStyles()
+    const { isSmallDevice } = useDisplaySize()
+    const { notes, fetchAgain } = useNoteList()
+    const [openCreateNoteModal, setOpenCreateNoteModal] =
+        useState<boolean>(false)
 
-  return (
-    <Grid
-      container
-      item
-      className={classes.viewNotasContainer}
-      flexDirection="column"
-      style={{ padding: !isSmallDevice ? '2em' : '' }}
-    >
-      {/* Create note modal: */}
-      <Grid item xs={12}>
-        <NoteCreate
-          modal={{ openCreateNoteModal, setOpenCreateNoteModal }}
-          fetchAgain={fetchAgain}
-        />
-      </Grid>
-      {!isSmallDevice && (
-        <Grid item xs={10} justifyContent="flex-end">
-          <Button
-            variant={'contained'}
-            onClick={() => {
-              setOpenCreateNoteModal(!openCreateNoteModal)
-            }}
-          >
-            New note
-          </Button>
-        </Grid>
-      )}
-      <Grid item xs={12}>
-        <NotesList notes={notes} fetchAgain={fetchAgain} />
-      </Grid>
-      {isSmallDevice && (
+    return (
         <Grid
-          container
-          item
-          xs={12}
-          className={classes.mobileCreateButtonContainer}
-          justifyContent="center"
-          alignItems="center"
+            container
+            item
+            className={classes.viewNotasContainer}
+            flexDirection="column"
+            style={{ padding: !isSmallDevice ? '2em' : '' }}
         >
-          <Button
-            variant={'contained'}
-            startIcon={<AddCircleOutlineIcon />}
-            onClick={() => {
-              setOpenCreateNoteModal(!openCreateNoteModal)
-            }}
-            className={classes.mobileCreateButton}
-          >
-            New note
-          </Button>
+            {/* Create note modal: */}
+            <Grid item xs={12}>
+                <NoteCreate
+                    modal={{ openCreateNoteModal, setOpenCreateNoteModal }}
+                    fetchAgain={fetchAgain}
+                />
+            </Grid>
+            {!isSmallDevice && (
+                <Grid item xs={10} justifyContent="flex-end">
+                    <Button
+                        variant={'contained'}
+                        onClick={() => {
+                            setOpenCreateNoteModal(!openCreateNoteModal)
+                        }}
+                    >
+                        New note
+                    </Button>
+                </Grid>
+            )}
+            <Grid item xs={12}>
+                <NotesList notes={notes} fetchAgain={fetchAgain} />
+            </Grid>
+            {isSmallDevice && (
+                <Grid
+                    container
+                    item
+                    xs={12}
+                    className={classes.mobileCreateButtonContainer}
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <Button
+                        variant={'contained'}
+                        startIcon={<AddCircleOutlineIcon />}
+                        onClick={() => {
+                            setOpenCreateNoteModal(!openCreateNoteModal)
+                        }}
+                        className={classes.mobileCreateButton}
+                    >
+                        New note
+                    </Button>
+                </Grid>
+            )}
         </Grid>
-      )}
-    </Grid>
-  )
+    )
 }
 
 export default NotesView

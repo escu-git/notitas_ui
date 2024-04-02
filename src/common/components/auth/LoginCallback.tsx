@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom'
 import LoadingSpinner from '../Loading/LoadingSpinner'
 
 const LoginCallback = () => {
-  const { fetchUser } = useContext(UserContext)
-  const navigate = useNavigate()
+    const { fetchUser } = useContext(UserContext)
+    const navigate = useNavigate()
 
-  useEffect(() => {
-    fetchUser()
-    navigate('/')
-  }, [])
+    useEffect(() => {
+        fetchUser()
+        navigate('/')
+    }, [])
 
-  return <LoadingSpinner />
+    return <LoadingSpinner />
 }
 
 export default LoginCallback
