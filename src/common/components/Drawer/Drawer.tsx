@@ -1,9 +1,9 @@
 import { Grid, IconButton } from '@mui/material'
 import DrawerList from './DrawerList'
 import useStyles from '@src/styles/useStyles'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import {useRef} from 'react'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import { useRef } from 'react'
 
 interface lateralDrawerProps {
     openDrawer: boolean
@@ -43,13 +43,11 @@ const LateralDrawer = ({
                     {openDrawer ? (
                         <KeyboardArrowUpIcon className={classes.drawerIcon} />
                     ) : (
-                        <KeyboardArrowDownIcon
-                            className={classes.drawerIcon}
-                        />
+                        <KeyboardArrowDownIcon className={classes.drawerIcon} />
                     )}
                 </IconButton>
             </Grid>
-            <DrawerList setOpenDrawer={setOpenDrawer} openDrawer={openDrawer}/>
+            <DrawerList setOpenDrawer={setOpenDrawer} openDrawer={openDrawer} />
         </Grid>
     )
 }

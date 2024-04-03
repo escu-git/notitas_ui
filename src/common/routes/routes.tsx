@@ -21,7 +21,7 @@ export const routes = createBrowserRouter([
     },
     {
         path: 'login',
-        element: <Header title={'Notitas App'} setHeaderHeight={()=>{}}/>,
+        element: <Header title={'Notitas App'} setHeaderHeight={() => {}} />,
     },
     {
         path: 'auth/callback',

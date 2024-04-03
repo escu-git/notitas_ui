@@ -14,19 +14,17 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#f0f0f0',
         boxShadow: '0 0 10px rgb(240, 240, 240, 0.2)',
         transition: 'all 0.1s ease',
-        borderRadius:10
-
+        borderRadius: 10,
     },
     closedDrawer: {
         position: 'fixed',
         top: 0,
         left: 0,
-        width:'100%',
+        width: '100%',
         height: 0,
         backgroundColor: '#f0f0f0',
         boxShadow: '0 0 0px rgba(0, 0, 0, 0.2)',
-        transition: 'all 0.1s ease'
-
+        transition: 'all 0.1s ease',
     },
     drawerButtonOpen: {
         width: 40,
@@ -34,40 +32,40 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#f0f0f0',
         position: 'absolute',
         right: 0,
-        borderRadius: '0px 0px px 0px',
-        boxShadow:
-            '5px 0px 10px rgba(0, 0, 0, 0.2),' +
-            '0px 5px 10px rgba(0, 0, 0, 0.2),' +
-            '0px -5px 10px rgba(0, 0, 0, 0.2),',
-            transition: 'all 3s ease'
+        // borderRadius: '0px 0px px 0px',
+        // boxShadow:
+        //     '5px 0px 10px rgba(0, 0, 0, 0.2),' +
+        //     '0px 5px 10px rgba(0, 0, 0, 0.2),' +
+        //     '0px -5px 10px rgba(0, 0, 0, 0.2),',
+        // transition: 'all 3s ease',
     },
     drawerButtonClosed: {
         width: 40,
-        height: 40,
+        height: '40px',
         backgroundColor: '#f0f0f0',
         position: 'absolute',
         right: 0,
-        borderRadius: '0px 0px 0px 10px',
-        boxShadow:
-        '0px 0px 0px rgba(0, 0, 0, 0.2),' +
-        '0px 5px 5px rgba(0, 0, 0, 0.2),' +
-        '0px 0px 0px ',
-        transition: 'all 3s ease'
+        // borderRadius: '0px 0px 0px 10px',
+        // boxShadow:
+        //     '0px 0px 0px rgba(0, 0, 0, 0.2),' +
+        //     '0px 5px 5px rgba(0, 0, 0, 0.2),' +
+        //     '0px 0px 0px ',
+        // transition: 'all 3s ease',
     },
     drawerIconContainer: {
         margin: 0,
         padding: 0,
     },
     drawerIcon: {
-        fontSize: '20px',
+        fontSize: '30px',
     },
-    drawerContentOpen:{
+    drawerContentOpen: {
         display: 'block',
-        transition: 'all 0.6s ease'
+        transition: 'all 0.6s ease',
     },
-    drawerContentClosed:{
+    drawerContentClosed: {
         display: 'none',
-        transition: 'all 0.5s ease'
+        transition: 'all 0.5s ease',
     },
     //#endregion drawer
     //#region header and maincontainer
@@ -110,7 +108,7 @@ const useStyles = makeStyles(() => ({
     logButton: {
         color: color.white + '!important',
         fontSize: '28px',
-        cursor:'pointer'
+        cursor: 'pointer',
     },
     headerUsername: {
         color: color.white,
@@ -118,16 +116,31 @@ const useStyles = makeStyles(() => ({
         fontWeight: 'bold',
         textAlign: 'center',
     },
+    navigationTitleContainer:{
+        minHeight:40,
+        height:'60px',
+        padding:'0 1em',
+        alignContent:'center'
+    },
+    navigationTitle: {
+        letterSpacing:1,
+        textTransform:'uppercase',
+        fontWeight:'bold',
+    },
     //#endregion header and maincontainer
     //#region notas
     viewNotasContainer: {
         //We force the height of the screen to its maximum, without exceding the max height:
-        padding: '1.5em',
         height: '100%',
         minHeight: '100%',
         boxSizing: 'border-box',
         overflowX: 'hidden',
         overflowY: 'hidden',
+    },
+    noteScrollArea: {
+        maxHeight: '75vh',
+        overflowY: 'scroll',
+        overFlowX:'hidden',
     },
     noteListContainer: {
         height: '100%',
@@ -163,7 +176,10 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         marginBottom: '1em',
     },
-    modalHeaderTitle: {},
+    modalHeaderTitle: {
+        color: color.white,
+        fontSize: '1.5em',
+    },
     modalFormContainer: {
         width: '100%',
         padding: '1em',

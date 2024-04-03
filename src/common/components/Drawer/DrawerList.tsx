@@ -13,13 +13,17 @@ interface drawerListProps {
     openDrawer: boolean
 }
 const DrawerList = ({ setOpenDrawer, openDrawer }: drawerListProps) => {
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <Box
             sx={{ width: 250 }}
             role="presentation"
             onClick={() => setOpenDrawer(false)}
-            className={openDrawer ? classes.drawerContentOpen : classes.drawerContentClosed}
+            className={
+                openDrawer
+                    ? classes.drawerContentOpen
+                    : classes.drawerContentClosed
+            }
         >
             {drawerItemList.map((item) => {
                 return (

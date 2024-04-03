@@ -1,12 +1,14 @@
-import { Grid, Typography } from '@mui/material'
+import { Avatar, Grid, Typography } from '@mui/material'
 import { useContext, useEffect } from 'react'
 import { UserContext } from '../../../context/UserContext'
 import LogButton from './LogButton'
 import useStyles from '../../../styles/useStyles'
+import useDisplaySize from '@src/common/hooks/useDisplaySize'
 // import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
     const classes = useStyles()
+    const { isSmallDevice } = useDisplaySize()
     const { userLogged, isLogged, setIsLogged, fetchUser, logOutUser } =
         useContext(UserContext)
     const username =
@@ -33,14 +35,33 @@ const LoginContainer = () => {
 
     return (
         <Grid container className={classes.loginContainer}>
-            <Grid item xs={9}>
+            <Grid
+                container
+                item
+                xs={9}
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+            >
                 {userLogged && (
-                    <Typography
-                        className={classes.headerUsername}
-                        variant="subtitle2"
-                    >
-                        {username}
-                    </Typography>
+                    <>
+                        {!isSmallDevice &&  (
+                            <Grid item xs={2}>
+                                <Avatar
+                                    alt={`${username}`}
+                                    src={userLogged.picture}
+                                />
+                            </Grid>
+                        )}
+                        <Grid container item xs={10}>
+                            <Typography
+                                className={classes.headerUsername}
+                                variant="subtitle2"
+                            >
+                                {username}
+                            </Typography>
+                        </Grid>
+                    </>
                 )}
             </Grid>
             <Grid item xs={3} className={classes.loginButtons}>

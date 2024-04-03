@@ -1,8 +1,9 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid } from '@mui/material'
 import Note from './Note'
 import { NoteModel } from '@src/models/Notes'
 import notesService from '@src/services/notesService'
 import useStyles from '@src/styles/useStyles'
+import { Scrollbars } from 'react-custom-scrollbars'
 
 interface componentProps {
     notes: NoteModel[]
@@ -26,11 +27,16 @@ const NotesList = ({ notes, fetchAgain }: componentProps) => {
             xs={12}
             flexDirection="column"
         >
-            <Typography variant={'h4'}>Notes</Typography>
-            {Array.isArray(notes) &&
-                notes.map((note) => (
-                    <Note key={note._id} note={note} deleteNote={deleteNote} />
-                ))}
+            <Grid container className={classes.noteScrollArea}>
+                {Array.isArray(notes) &&
+                    notes.map((note) => (
+                        <Note
+                            key={note._id}
+                            note={note}
+                            deleteNote={deleteNote}
+                        />
+                    ))}
+            </Grid>
         </Grid>
     )
 }
