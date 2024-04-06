@@ -1,19 +1,15 @@
-import { Button, Divider, Grid } from '@mui/material'
-import NoteCreate from '@src/common/components/Notes/NoteCreateModal'
-import NotesList from '@src/common/components/Notes/NotesList'
-import useNoteList from '@src/common/hooks/useNoteList'
-import useStyles from '@src/styles/useStyles'
-import { useState } from 'react'
+import { Button, Divider, Grid } from '@mui/material';
+import NavigationTitle from '@src/common/components/Header/NavigationTitle';
+import NoteCreate from '@src/common/components/Notes/NoteCreateModal';
+import useDisplaySize from '@src/common/hooks/useDisplaySize';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
-import useDisplaySize from '@src/common/hooks/useDisplaySize'
-import NavigationTitle from '@src/common/components/Header/NavigationTitle'
+import useStyles from '@src/styles/useStyles';
+import { useState } from 'react';
 
-const NotesView = () => {
-    const classes = useStyles()
-    const { isSmallDevice } = useDisplaySize()
-    const { notes, fetchAgain } = useNoteList()
-    const [openCreateNoteModal, setOpenCreateNoteModal] =
-        useState<boolean>(false)
+const FriendsView = () => {
+    const classes = useStyles();
+    const [openCreateNoteModal, setOpenCreateNoteModal] = useState<boolean>(false)
+    const {isSmallDevice} = useDisplaySize();
 
     return (
         <Grid
@@ -22,14 +18,14 @@ const NotesView = () => {
             className={classes.viewNotasContainer}
             flexDirection="column"
         >
-            <NavigationTitle title={'Notes'} 
+            <NavigationTitle title={'Friends'} 
             children={!isSmallDevice && <Button
                             variant={'contained'}
                             onClick={() => {
                                 setOpenCreateNoteModal(!openCreateNoteModal)
                             }}
                         >
-                            New note
+                            Add friend
                         </Button>} 
             />
             <Divider variant='fullWidth'/>
@@ -38,12 +34,12 @@ const NotesView = () => {
                 <Grid item xs={12}>
                     <NoteCreate
                         modal={{ openCreateNoteModal, setOpenCreateNoteModal }}
-                        fetchAgain={fetchAgain}
+                        fetchAgain={()=>{}}
                     />
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <NotesList notes={notes} fetchAgain={fetchAgain} />
-                </Grid>
+                </Grid> */}
                 {isSmallDevice && (
                     <Grid
                         container
@@ -61,13 +57,13 @@ const NotesView = () => {
                             }}
                             className={classes.mobileCreateButton}
                         >
-                            New note
+                            Add friend
                         </Button>
                     </Grid>
                 )}
             </Grid>
         </Grid>
-    )
-}
+    );
+};
 
-export default NotesView
+export default FriendsView;

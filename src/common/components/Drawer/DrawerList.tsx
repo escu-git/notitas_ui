@@ -7,6 +7,7 @@ import {
 } from '@mui/material'
 import { drawerItemList } from './drawerItemList'
 import useStyles from '@src/styles/useStyles'
+import { useNavigate } from 'react-router-dom'
 
 interface drawerListProps {
     setOpenDrawer: (openDrawer: boolean) => void
@@ -14,6 +15,8 @@ interface drawerListProps {
 }
 const DrawerList = ({ setOpenDrawer, openDrawer }: drawerListProps) => {
     const classes = useStyles()
+    const navigate = useNavigate();
+
     return (
         <Box
             sx={{ width: 250 }}
@@ -28,7 +31,7 @@ const DrawerList = ({ setOpenDrawer, openDrawer }: drawerListProps) => {
             {drawerItemList.map((item) => {
                 return (
                     <ListItem key={item.title}>
-                        <ListItemButton>
+                        <ListItemButton onClick={()=>navigate(item.path)}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.title} />
                         </ListItemButton>
