@@ -1,4 +1,4 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Paper, Typography } from '@mui/material'
 import { NoteModel } from '@src/models/Notes'
 import useStyles from '@src/styles/useStyles'
 import { DeleteIcon } from '@src/common/components/Icons/Icons'
@@ -15,21 +15,23 @@ const Note = ({ note, deleteNote }: NoteProps) => {
 
     const classes = useStyles()
     return (
-        <Grid
-            container
-            item
-            xs={8}
-            flexDirection={'row'}
-            className={classes.notePreview}
+        <Paper elevation={3} style={{backgroundColor:note.color }}
+        className={classes.notePreview}
         >
-            <Grid container item flexDirection={'column'} xs={11}>
+            <Grid
+                container
+                flexDirection={'row'}
+            >
                 <Typography variant={'h5'}>{note.title}</Typography>
+            </Grid>
+            <Grid>
                 <Typography variant={'body1'}>{note.content}</Typography>
             </Grid>
-            <Grid item xs={1}>
                 <DeleteIcon accion={handleDelete} />
-            </Grid>
-        </Grid>
+           
+
+        </Paper>
+        
     )
 }
 

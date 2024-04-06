@@ -3,7 +3,7 @@ import Note from './Note'
 import { NoteModel } from '@src/models/Notes'
 import notesService from '@src/services/notesService'
 import useStyles from '@src/styles/useStyles'
-import { Scrollbars } from 'react-custom-scrollbars'
+import useDisplaySize from '@src/common/hooks/useDisplaySize'
 
 interface componentProps {
     notes: NoteModel[]
@@ -12,6 +12,7 @@ interface componentProps {
 
 const NotesList = ({ notes, fetchAgain }: componentProps) => {
     const classes = useStyles()
+    const {isSmallDevice} = useDisplaySize();
 
     const deleteNote = async (id: string) => {
         await notesService.deleteNote(id).then((x) => {
@@ -27,7 +28,7 @@ const NotesList = ({ notes, fetchAgain }: componentProps) => {
             xs={12}
             flexDirection="column"
         >
-            <Grid container className={classes.noteScrollArea}>
+            <Grid container className={isSmallDevice ? classes.noteScrollAreaMobile :classes.noteScrollArea}>
                 {Array.isArray(notes) &&
                     notes.map((note) => (
                         <Note

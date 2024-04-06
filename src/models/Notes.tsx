@@ -10,7 +10,8 @@ export interface NoteModel {
         notification_type?: string // Optional
     }
     category: number
-    active: boolean
+    active: boolean,
+    color:string
 }
 
 export interface NewNoteModel {
@@ -23,5 +24,6 @@ export interface NewNoteModel {
         date: Date
         notification_type: string
     }
-    active: boolean
+    active: boolean,
+    color:string
 }

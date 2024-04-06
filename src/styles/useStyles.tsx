@@ -137,9 +137,14 @@ const useStyles = makeStyles(() => ({
         overflowX: 'hidden',
         overflowY: 'hidden',
     },
-    noteScrollArea: {
+    noteScrollAreaMobile: {
         maxHeight: '75vh',
         overflowY: 'scroll',
+        overFlowX:'hidden',
+    },
+    noteScrollArea:{
+        maxHeight: '90vh',
+        overflowY: 'hidden',
         overFlowX:'hidden',
     },
     noteListContainer: {
@@ -149,7 +154,14 @@ const useStyles = makeStyles(() => ({
         overflowX: 'hidden',
         overflowY: 'hidden',
     },
-    notePreview: {},
+    notePreview: {
+        padding: '20px',
+        margin: '10px',
+        width: 'fit-content',
+        boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.2)', // Adding shadow for depth
+        borderRadius: '8px', // Rounded corners like post-it notes
+        position: 'relative', // To position the folded corner and torn edges   
+    },
     modalNewNote: {
         width: '100%',
         height: '100%',
@@ -179,7 +191,12 @@ const useStyles = makeStyles(() => ({
     modalHeaderTitle: {
         color: color.white,
         fontSize: '1.5em',
-    },
+        fontWeight:400,
+        // WebkitTextStrokeWidth: '1px', // Width of the stroke for WebKit browsers
+        // WebkitTextStrokeColor: 'black', // Color of the stroke for WebKit browsers
+        // textStrokeWidth: '1px', // Width of the stroke for other browsers
+        // textStrokeColor: 'black', // Color of the stroke for other browsers
+    },    
     modalFormContainer: {
         width: '100%',
         padding: '1em',

@@ -15,6 +15,7 @@ import notesService from '@src/services/notesService'
 import useStyles from '@src/styles/useStyles'
 import { UserContext } from '@src/context/UserContext'
 import useDisplaySize from '@src/common/hooks/useDisplaySize'
+import { useColorPallete } from '@src/styles/colorPallete'
 
 interface componentProps {
     modal: {
@@ -26,9 +27,11 @@ interface componentProps {
 
 const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
     const classes = useStyles()
+    const color = useColorPallete;
     const { userLogged } = useContext(UserContext)
     const { openCreateNoteModal, setOpenCreateNoteModal } = modal
     const [reminder, setReminder] = useState<boolean>(false)
+    const [noteColor, setNoteColor] = useState<string>(color.primary.light)
     const { isSmallDevice } = useDisplaySize()
 
     const INITIAL_VALUES: NewNoteModel = {
@@ -42,6 +45,7 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
         },
         category: 0,
         active: true,
+        color: ""
     }
 
     const { handleSubmit, control, reset } = useForm<NewNoteModel>({
@@ -63,10 +67,12 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
         try {
             note.user = userLogged.email
             createNote(note)
+            .then(()=>{
+                fetchAgain()
+            })
         } catch (err) {
             console.log(err)
         } finally {
-            fetchAgain()
             handleCloseModal()
         }
     }
@@ -96,9 +102,13 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
                 xs={12}
                 md={12}
                 className={classes.createNoteModal}
+                
             >
                 <Paper className={classes.modalPaper}>
-                    <Grid className={classes.modalHeader}>
+                    <Grid 
+                        className={classes.modalHeader}
+                        style={{backgroundColor:noteColor}}
+                    >
                         <Typography
                             variant={'h6'}
                             className={classes.modalHeaderTitle}
@@ -114,6 +124,23 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
                     >
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Grid container item xs={12} gap={'0.5em'}>
+                                <Grid>
+                                    <Controller
+                                        name="color"
+                                        control={control}
+                                        render={({ field: { onChange } }) => (
+                                            <input
+                                                type="color"
+                                                id="color"
+                                                value={noteColor}
+                                                onChange={(e) => {
+                                                    onChange(e.target.value);
+                                                    setNoteColor(e.target.value);
+                                                }}
+                                            />
+                                        )}
+                                    />
+                                </Grid>
                                 <Grid item xs={12}>
                                     <Controller
                                         name="title"
@@ -139,11 +166,11 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
                                                 label="Category"
                                                 {...field}
                                                 id={'category'}
-                                                // options={[
-                                                //     {value: 0, label: 'Personal'},
-                                                //     {value: 1, label: 'Work'},
-                                                //     {value: 2, label: 'Other'}
-                                                // ]}
+                                            // options={[
+                                            //     {value: 0, label: 'Personal'},
+                                            //     {value: 1, label: 'Work'},
+                                            //     {value: 2, label: 'Other'}
+                                            // ]}
                                             />
                                         )}
                                     />

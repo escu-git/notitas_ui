@@ -33,7 +33,7 @@ const Header = ({ title, setHeaderHeight }: HeaderProps) => {
                 className={classes.header}
                 style={{ padding: !isSmallDevice ? '2em' : '' }}
             >
-                <Grid item xs={5}>
+                <Grid item xs={5} md={9}>
                     <Typography className={classes.title}>
                         {title} <SpeakerNotesIcon style={{ fontSize: 30 }} />
                     </Typography>
@@ -42,6 +42,7 @@ const Header = ({ title, setHeaderHeight }: HeaderProps) => {
                     container
                     item
                     xs={6}
+                    md={3}
                     justifyContent="center"
                     alignItems="center"
                 >
