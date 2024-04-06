@@ -16,6 +16,8 @@ import useStyles from '@src/styles/useStyles'
 import { UserContext } from '@src/context/UserContext'
 import useDisplaySize from '@src/common/hooks/useDisplaySize'
 import { useColorPallete } from '@src/styles/colorPallete'
+import { hexToRgb } from '@src/common/components/helpers/colorHandler'
+import useColorBrightness from '@src/common/hooks/useColorBrightness'
 
 interface componentProps {
     modal: {
@@ -32,6 +34,7 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
     const { openCreateNoteModal, setOpenCreateNoteModal } = modal
     const [reminder, setReminder] = useState<boolean>(false)
     const [noteColor, setNoteColor] = useState<string>(color.primary.light)
+    const {fontColor} = useColorBrightness({backgroundColor: noteColor});
     const { isSmallDevice } = useDisplaySize()
 
     const INITIAL_VALUES: NewNoteModel = {
@@ -112,6 +115,7 @@ const NoteCreate = ({ modal, fetchAgain }: componentProps) => {
                         <Typography
                             variant={'h6'}
                             className={classes.modalHeaderTitle}
+                            style={{color:fontColor}}
                         >
                             Create Note
                         </Typography>

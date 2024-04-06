@@ -1,5 +1,6 @@
 export const useColorPallete = {
     white: '#fff',
+    black: '#000',
     primary: {
         main: '#3f51b5',
         light: '#757de8',
