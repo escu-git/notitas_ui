@@ -16,7 +16,6 @@ import useStyles from '@src/styles/useStyles'
 import { UserContext } from '@src/context/UserContext'
 import useDisplaySize from '@src/common/hooks/useDisplaySize'
 import { useColorPallete } from '@src/styles/colorPallete'
-import { hexToRgb } from '@src/common/components/helpers/colorHandler'
 import useColorBrightness from '@src/common/hooks/useColorBrightness'
 
 interface componentProps {

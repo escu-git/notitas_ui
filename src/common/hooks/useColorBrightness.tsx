@@ -1,6 +1,6 @@
 import { useColorPallete } from "@src/styles/colorPallete";
 import { useEffect, useState } from "react";
-import { hexToRgb } from "../components/helpers/colorHandler";
+import { hexToRgb } from "@src/common/helpers/colorHandler";
 
 type hookProps = {
     backgroundColor:string
