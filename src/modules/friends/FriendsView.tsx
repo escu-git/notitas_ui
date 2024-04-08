@@ -5,10 +5,15 @@ import useDisplaySize from '@src/common/hooks/useDisplaySize';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import useStyles from '@src/styles/useStyles';
 import { useState } from 'react';
+import useFriendRequestsList from '@src/common/hooks/useFriendRequestsList';
+import FriendsList from '@src/common/components/Friends/FriendsList';
+import LoadingSpinner from '@src/common/components/Loading/LoadingSpinner';
 
 const FriendsView = () => {
     const classes = useStyles();
     const [openCreateNoteModal, setOpenCreateNoteModal] = useState<boolean>(false)
+    const [reload]=useState<boolean> (false);
+    const {requests, loadingRequests} = useFriendRequestsList({reload:reload})
     const {isSmallDevice} = useDisplaySize();
 
     return (
@@ -37,9 +42,11 @@ const FriendsView = () => {
                         fetchAgain={()=>{}}
                     />
                 </Grid>
-                {/* <Grid item xs={12}>
-                    <NotesList notes={notes} fetchAgain={fetchAgain} />
-                </Grid> */}
+                <Grid item xs={12}>
+                   {loadingRequests ? 
+                    <LoadingSpinner/> : 
+                    <FriendsList requests={requests} friends={[]} />}
+                </Grid>
                 {isSmallDevice && (
                     <Grid
                         container

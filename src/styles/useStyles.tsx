@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
         top: 0,
         left: 0,
         width: '100%',
-        height: '200px',
+        height: '250px',
         backgroundColor: '#f0f0f0',
         boxShadow: '0 0 10px rgb(240, 240, 240, 0.2)',
         transition: 'all 0.1s ease',
@@ -218,7 +218,13 @@ const useStyles = makeStyles(() => ({
         width: '90%',
         height: '3em',
     },
+    //#endregion notas
+    //#region friends
+    friendList:{
+        gap: '1em',
+        paddingTop:'1em'
+    },
+    //#endregion friends
 }))
-//#endregion notas
 
 export default useStyles
